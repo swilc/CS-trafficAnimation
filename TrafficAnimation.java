@@ -64,7 +64,7 @@ public class TrafficAnimation extends JPanel
 		// Calculate the new xOffset position of the moving object.
 		xOffset  = (xOffset + stepSize) % width;
 
-		// Set up dimensions for the road
+		// Set up dimensions/coords for the road
 		int roadW = width;
 		int roadH = height/3; 
 		int roadX = 0;
@@ -78,7 +78,46 @@ public class TrafficAnimation extends JPanel
 		g.setColor(Color.black);
 		g.fillRect(roadX, roadY, roadW, roadH);
 		
-		// Set up base dimensions for car
+		// Set up base dimensions/coords for scenery
+		int plantW = width/6;
+		int plantH = height/4; 
+		int plantX = width-plantW+plantW/4;
+		int plantY = height-plantH+plantH/5;
+		
+		// Draw plant
+		g.setColor(Color.green);
+		g.fillOval(plantX+plantW/2, plantY-plantH/3, plantW/2, plantH/2);
+		g.fillOval(plantX, plantY, plantW, plantH);
+		g.fillOval(plantX-plantW/3, plantY+plantH/2, plantW/2, plantH/2);
+		
+		// Set up base dimensions/coords for person (head)
+		int personW = width/15;
+		int personH = height/10; 
+		int personX = width/2-personW/2;
+		int personY = height-height/4;
+		
+		// Draw person body
+		g.setColor(Color.white);
+		g.fillOval(personX, personY, personW, personH);
+		g.drawLine(personX+personW/2, personY+personH/6, personX+personW/2, personY+personH*2);
+		g.drawLine(personX+personW/2, personY+personH, personX, personY+personH*2-personH/3);
+		g.drawLine(personX+personW/2, personY+personH, personX+personW, personY+personH*2-personH/3);
+		g.drawLine(personX+personW/2, personY+personH*2, personX, height);
+		g.drawLine(personX+personW/2, personY+personH*2, personX+personW, height);
+		
+		// Draw person face (sunglasses and mouth)
+		g.setColor(Color.black);
+		g.fillOval(personX+personW/9, personY+personH/4, personW/3, personH/4);
+		g.fillOval(personX+personW/2, personY+personH/4, personW/3, personH/4);
+		g.drawLine(personX+personW/25, personY+personH/3, personX+personW, personY+personH/3);
+		g.drawLine(personX+personW/3, personY+personH-personH/3, personX+personW/2, personY+personH-personH/3);
+		
+		// Draw text
+		g.setColor(Color.white);
+		String message = "java needs to chill with the semicolins";
+		g.drawString(message, personX, personY);
+
+		// Set up base dimensions/coords for car
 		int carW = height/6;
 		int carH = height/10; 
 		int carX = xOffset;
@@ -94,7 +133,7 @@ public class TrafficAnimation extends JPanel
 		g.fillRect(carX+carW/8, carY+carH/2, carW, carH/2);
 		
 		// Set color for windows
-		g.setColor(Color.black);
+		g.setColor(new Color(130, 130, 130));
 		// Draw one large oval as a window
 		g.fillOval(carX+carH/6, carY+carH/15, carW-carW/6, carH-carH/6);
 		
